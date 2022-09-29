@@ -1,0 +1,44 @@
+﻿@model OdeToFood.Data.Models.Restaurant
+
+@{
+    ViewBag.Title = "ClosedRestaurant";
+}
+
+<h2>Your restaurant was closed</h2>
+<br>
+<div>
+    <h4>Restaurant Details:</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeactivationReason)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeactivationReason)
+        </dd>
+
+    </dl>
+    <h5>Once the stated issues are resolved, send an email to admin@gmail.com</h5>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

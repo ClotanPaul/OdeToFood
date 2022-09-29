@@ -1,0 +1,71 @@
+﻿@model IEnumerable<OdeToFood.Data.Models.MenuItem>
+
+@{
+    ViewBag.Title = "Restaurant Menu";
+}
+
+<h2>@Model.FirstOrDefault().Menu.Name Dishes List</h2>
+
+<br>
+
+@if (Model.FirstOrDefault().Menu.Restaurant.OwnerId == User.Identity.GetUserId())
+{
+<p>
+    @Html.ActionLink("Add a new dish", "Create", new { menuId = (int)ViewData["menuId"] })
+</p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NutritionalValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Calories)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsVegan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NutritionalValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Calories)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsVegan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @if (item.Menu.Restaurant.OwnerId == User.Identity.GetUserId())
+                {
+                    @Html.ActionLink("Edit", "Edit", new { menuItemId = item.Id }) <text>|</text>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) <text>|</text>
+                    @Html.ActionLink("Delete", "Delete", new { menuItemId = item.Id })
+                }
+            </td>
+        </tr>
+    }
+</table>
+@Html.ActionLink("Back to Menu List", "ShowRestaurantMenu", "Menu", new { restaurantId = ViewData["restaurantId"] }, null)

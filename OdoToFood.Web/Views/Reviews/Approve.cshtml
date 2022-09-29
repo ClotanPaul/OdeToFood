@@ -1,0 +1,48 @@
+﻿@model OdeToFood.Data.Models.RestaurantReview
+
+@{
+    ViewBag.Title = "Approve";
+}
+
+<h2>Review Approval</h2>
+<br>
+
+<h4>Are you sure you want to approve this review?</h4>
+<h5>Review Details:</h5>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Grade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Grade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Review)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Review)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Restaurant.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Restaurant.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Approve" class="btn btn-default" /> |
+    @Html.ActionLink("Back to ReviewList", "GetUnapprovedReviews")
+</div>
+    }
+</div>

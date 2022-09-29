@@ -1,0 +1,89 @@
+﻿@model OdeToFood.Data.Models.Restaurant
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.Name Restaurant Details </h2>
+<br>
+<div>
+    <h4>Restaurant info:</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cuisine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cuisine)
+        </dd>
+        <br>
+        @if (Model.Reviews.Count > 0)
+        {
+        <div>
+            <hr />
+            <h4>Restaurant Reviews:</h4>
+
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Reviews.First().Grade)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Reviews.First().Review)
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.Reviews)
+                {
+                    if (item.IsApproved)
+                    {
+                        <tr>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Grade)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Review)
+                            </td>
+                            @if (User.Identity.GetUserId() == item.UserId)
+                            {
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                </td>
+                            }
+                        </tr>
+
+                    }
+                }
+            </table>
+
+        </div>
+        <text>*If you edit your review, it will need to be approved again by an administrator.</text>
+        }
+</div>
+        
+
+<p>
+    @Html.ActionLink("Edit Restaurant", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Delete Restaurant", "Delete", new { id = Model.Id }) |
+    @Html.ActionLink("Show Menus", "ShowRestaurantMenu", "Menu", new { restaurantId = Model.Id }, null) |
+
+    @Html.ActionLink("Back to Restaurant List", "Index")
+</p>
+

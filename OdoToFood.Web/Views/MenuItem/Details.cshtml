@@ -1,0 +1,67 @@
+﻿@model OdeToFood.Data.Models.MenuItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<br>
+<div>
+    <h4>Dish Details:</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NutritionalValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NutritionalValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Calories)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Calories)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsVegan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsVegan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { menuItemId = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index", new { menuId = Model.RestaurantMenuId })
+</p>

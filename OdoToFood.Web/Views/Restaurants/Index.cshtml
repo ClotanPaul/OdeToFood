@@ -1,0 +1,64 @@
+﻿@model IEnumerable<OdeToFood.Data.Models.Restaurant>
+
+@{
+    ViewBag.Title = "Restaurants";
+}
+
+<h2>Restaurant Catalog</h2>
+
+@if (User.IsInRole("Admin") || User.IsInRole("RestaurantOwner"))
+{
+    <p>
+        @Html.ActionLink("Open your own restaurant!", "Create")
+    </p>
+}
+<br>
+
+@foreach (var item in Model)
+{
+
+    <div class="pannel pannel-default">
+        <div class="pannel-heading">
+            @if (item.isActive)
+            {
+                <h4 class=" pannel-title">@item.Name</h4>
+                <div>
+                    @Html.ActionLink("Show Menus", "ShowRestaurantMenu", "Menu", new { restaurantId = item.Id }, null) <text> | </text>
+                    @Html.ActionLink("Show Reviews", "Index", "Reviews", new { restaurantId = item.Id }, null)
+                </div>
+            }
+            else
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    <h4 class=" pannel-title"><span style="color:red">@item.Name</span></h4>
+
+                }
+            }
+
+        </div>
+
+
+        @if (User.IsInRole("Admin"))
+        {
+            <div>
+                <text> ( </text>
+                @Html.ActionLink("Restaurant Details", "Details", "Restaurants", new { id = item.Id }, null) <text> | </text>
+                @Html.ActionLink("Edit Restaurant", "Edit", "Restaurants", new { Id = item.Id }, null) <text> | </text>
+                @Html.ActionLink("Delete Restaurant", "Delete", "Restaurants", new { Id = item.Id }, null) <text> | </text>
+
+                @if (item.isActive)
+                {
+                    @Html.ActionLink("Deactivate Restaurant", "DeactivateRestaurant", "Restaurants", new { Id = item.Id }, null)
+                }
+                else
+                {
+                    @Html.ActionLink("Activate Restaurant", "ActivateRestaurant", "Restaurants", new { Id = item.Id }, null);
+                    <text> ( Reason of deactivation: @item.DeactivationReason )</text>
+                }
+
+                <text> ) </text>
+            </div>
+        }
+    </div>
+}
